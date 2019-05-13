@@ -14,8 +14,12 @@ class OrdersController < ApplicationController
   def create
     if current_buyer
       @orders = Order.where(buyer_id: current_buyer.id)
-      @first_photo = @orders.first.line_items.first.photo.uploaded_image
-      render :index
+      if @orders.first.line_items.first.photo != nil 
+        @first_photo = @orders.first.line_items.first.photo.uploaded_image
+        render :index
+      else 
+        render :new 
+      end 
     else
       page_not_find
     end
