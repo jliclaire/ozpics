@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
   def create
     if current_buyer
       @orders = Order.where(buyer_id: current_buyer.id)
-
       render :index
     else
       page_not_find
